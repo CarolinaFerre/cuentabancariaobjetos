@@ -1,0 +1,117 @@
+package banco;
+import java.util.Scanner;
+import java.util.Random;
+
+public class cuentacorriente {
+static Scanner sc=new Scanner(System.in);
+
+private static String nombre;
+private static double saldoinicial;
+public static int numerocuenta;
+static double ingreso;
+static double retirarsaldo;
+static int cuenta1;
+static int cuenta2;
+static double cantidad;
+	public cuentacorriente(String nombre,double saldoinicial) {
+		//constructor
+		this.nombre=nombre;
+		this.saldoinicial=saldoinicial;
+		setNumeroCuenta(numerocuenta);
+		
+	}
+	public void saldoinicial() {
+		System.out.println("El saldo de su cuenta es= "+saldoinicial);
+	}
+
+	public void setIngresocuenta(double saldoinicial,double ingreso) {
+		if (ingreso<=0) {
+			System.out.println("No se puede realizar el ingreso porque es menor o igual a 0");
+		}else {
+			saldoinicial+=ingreso;
+			System.out.println("Dispone de este saldo= "+saldoinicial);
+		}
+	}
+	public void setretirarSaldo(double saldoinicial,double retirarsaldo) {
+		if (retirarsaldo<=0) {
+			System.out.println("No se puede realizar la operación");
+		}else {
+			saldoinicial-=retirarsaldo;
+			System.out.println("Dispone de este saldo= "+saldoinicial);
+		}
+	}
+	
+	public static void Transferencia(cuentacorriente cuenta1, cuentacorriente cuenta2,double cantidad, double saldoinicial) {
+		if(cantidad>0) {
+		saldoinicial+=cantidad;
+		System.out.println("Su dinero tras la transferencia es= "+saldoinicial);
+		}else {
+			System.out.println("No puede realizarse la operación porque la cantidad para hacer la transferencia es menor a 0");
+			System.exit(0);
+		}
+		
+		
+	}
+	public void getSaldo(double saldoinicial) {
+		System.out.println("El saldo de la cuenta es= "+saldoinicial);
+	}
+	public void setNumeroCuenta(int numerocuenta) {
+		Random cuenta=new Random();
+		numerocuenta=(int) Math.abs(cuenta.nextLong());
+		System.out.println("El número de cuenta es= "+numerocuenta);
+	}
+	public void getDatoscuenta(double saldoinicial,String nombre,int numerocuenta) {
+		System.out.println("Su nombre es= "+nombre);
+		System.out.println("El saldo que tiene es= "+saldoinicial);
+		
+	}
+	public static void main (String[]args) {
+		//creación de las dos cuentas corrientes como objetos y asignación de valores
+		cuentacorriente cuenta1=new cuentacorriente("Verónica",1500);
+		cuentacorriente cuenta2=new cuentacorriente("Isabel",3400);
+		
+		//creación de menú para el banco
+		int contador=0;
+		while(contador!=4) {
+		System.out.println("************BINVENIDO AL MINI BANCO**************");
+		System.out.println("Pulse 1 para ver su saldo ");
+		System.out.println("Pulse 2 para hacer un ingreso");
+		System.out.println("Pulse 3 para hacer un reintegro");
+		System.out.println("Pulse 4 para hacer una transferencia");
+		System.out.println("Pulse 5 para ver los datos de su cuenta");
+		System.out.println("Seleccione una opción");
+		int opcion=sc.nextInt();
+		
+		switch(opcion) {
+		case 1:
+			
+			cuenta2.saldoinicial();
+		break;
+		case 2:
+			System.out.println("Seleccione el dinero a ingresar");
+			double ingreso=sc.nextDouble();
+			System.out.println("Su dinero tras el ingreso es= ");
+			cuenta2.setIngresocuenta(saldoinicial, ingreso);
+		break;
+		case 3:
+			System.out.println("Seleccione el dinero a retirar");
+			double retirarsaldo=sc.nextDouble();
+			System.out.println("Su dinero tras el reintegro es= ");
+			cuenta2.setretirarSaldo(saldoinicial,retirarsaldo);
+		break;
+		case 4:
+			double cantidad=150;
+			cuenta2.Transferencia(cuenta1, cuenta2, cantidad,saldoinicial);
+			
+		break;
+		case 5:
+			cuenta2.setNumeroCuenta(numerocuenta);
+			cuenta2.getDatoscuenta(saldoinicial, nombre, numerocuenta);
+		}
+		contador++;
+		System.out.println("***************HASTA PRONTO******************");
+	}
+	
+	
+}
+}
